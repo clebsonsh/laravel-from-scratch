@@ -10,50 +10,11 @@
 </head>
 
 <body>
+    <?php foreach ($posts as $post) : ?>
     <article>
-        <h1><a href="/post/my-first-post">My First Post</a></h1>
-
-        <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur deserunt nihil dolorum! Vero hic dolor
-            voluptas beatae ducimus tempora amet, est numquam sapiente blanditiis animi ipsum, porro dolorum. Eveniet,
-            ab adipisci, temporibus ullam doloremque excepturi recusandae ducimus hic quo iste odit fuga architecto
-            perferendis saepe in tempora? Minima corrupti voluptatibus dolores explicabo dolorum adipisci similique
-            delectus eius, natus ratione deleniti ducimus sequi accusamus minus optio debitis omnis modi? Aperiam
-            necessitatibus cum reiciendis perspiciatis facere libero minus ipsum officia, earum quaerat fuga blanditiis
-            neque corporis exercitationem dolore nesciunt ullam deleniti accusantium est tempora hic error repudiandae?
-            Quas commodi esse quo laborum!
-        </p>
+        <?= $post ?>
     </article>
-
-    <article>
-        <h1><a href="/post/my-second-post">My Second Post</a></h1>
-
-        <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur deserunt nihil dolorum! Vero hic dolor
-            voluptas beatae ducimus tempora amet, est numquam sapiente blanditiis animi ipsum, porro dolorum. Eveniet,
-            ab adipisci, temporibus ullam doloremque excepturi recusandae ducimus hic quo iste odit fuga architecto
-            perferendis saepe in tempora? Minima corrupti voluptatibus dolores explicabo dolorum adipisci similique
-            delectus eius, natus ratione deleniti ducimus sequi accusamus minus optio debitis omnis modi? Aperiam
-            necessitatibus cum reiciendis perspiciatis facere libero minus ipsum officia, earum quaerat fuga blanditiis
-            neque corporis exercitationem dolore nesciunt ullam deleniti accusantium est tempora hic error repudiandae?
-            Quas commodi esse quo laborum!
-        </p>
-    </article>
-
-    <article>
-        <h1><a href="/post/my-third-post">My Third Post</a></h1>
-
-        <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur deserunt nihil dolorum! Vero hic dolor
-            voluptas beatae ducimus tempora amet, est numquam sapiente blanditiis animi ipsum, porro dolorum. Eveniet,
-            ab adipisci, temporibus ullam doloremque excepturi recusandae ducimus hic quo iste odit fuga architecto
-            perferendis saepe in tempora? Minima corrupti voluptatibus dolores explicabo dolorum adipisci similique
-            delectus eius, natus ratione deleniti ducimus sequi accusamus minus optio debitis omnis modi? Aperiam
-            necessitatibus cum reiciendis perspiciatis facere libero minus ipsum officia, earum quaerat fuga blanditiis
-            neque corporis exercitationem dolore nesciunt ullam deleniti accusantium est tempora hic error repudiandae?
-            Quas commodi esse quo laborum!
-        </p>
-    </article>
+    <?php endforeach ?>
 </body>
 
 </html>
