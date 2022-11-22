@@ -10,30 +10,33 @@ class Post
 {
     public $title;
     public $excerpt;
-    public $data;
+    public $date;
     public $body;
     public $slug;
 
-    public function __construct($title, $excerpt, $data, $body, $slug)
+    public function __construct($title, $excerpt, $date, $body, $slug)
     {
         $this->title = $title;
         $this->excerpt = $excerpt;
-        $this->data = $data;
+        $this->date = $date;
         $this->body = $body;
         $this->slug = $slug;
     }
 
     public static function all()
     {
-        return collect(File::files(resource_path("posts/")))
-            ->map(fn ($file) => YamlFrontMatter::parseFile($file))
-            ->map(fn ($documet) => new Post(
-                $documet->title,
-                $documet->excerpt,
-                $documet->date,
-                $documet->body(),
-                $documet->slug,
-            ));
+        return cache()->rememberForever('posts.all', function () {
+            return collect(File::files(resource_path("posts/")))
+                ->map(fn ($file) => YamlFrontMatter::parseFile($file))
+                ->map(fn ($documet) => new Post(
+                    $documet->title,
+                    $documet->excerpt,
+                    $documet->date,
+                    $documet->body(),
+                    $documet->slug,
+                ))
+                ->sortByDesc('date');
+        });
     }
 
     public static function find($slug)
