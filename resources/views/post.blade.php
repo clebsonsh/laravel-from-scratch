@@ -3,9 +3,7 @@
         <h2>{{ $post->title }}</h2>
 
         <div>
-            <p>
-                {!! $post->body !!}
-            </p>
+            {!! $post->body !!}
         </div>
     </article>
 
