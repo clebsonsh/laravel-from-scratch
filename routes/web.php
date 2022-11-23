@@ -21,7 +21,7 @@ Route::get('/', function () {
 });
 
 Route::get('posts/{post:slug}', function (Post $post) {
-    return view('post', ['post' =>  $post]);
+    return view('post', ['post' =>  $post->loadMissing(['user', 'category'])]);
 });
 
 Route::get('categories/{category:slug}', function (Category $category) {
