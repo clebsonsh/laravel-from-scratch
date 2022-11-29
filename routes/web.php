@@ -17,11 +17,11 @@ use App\Models\User;
 */
 
 Route::get('/', function () {
-    return view('posts', ['posts' => Post::latest()->with('author', 'category')->get()]);
+    return view('posts', ['posts' => Post::latest()->get()]);
 });
 
 Route::get('posts/{post:slug}', function (Post $post) {
-    return view('post', ['post' =>  $post->loadMissing('author', 'category')]);
+    return view('post', ['post' =>  $post]);
 });
 
 Route::get('categories/{category:slug}', function (Category $category) {

@@ -17,6 +17,8 @@ class Post extends Model
         'category_id'
     ];
 
+    protected $with = ['author', 'category'];
+
     public function author()
     {
         return $this->belongsTo(User::class, 'user_id');
