@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
             'username' => 'john-doe'
         ]);
 
-        Post::factory(5)->create([
+        Post::factory(9)->create([
             'user_id' => $user->id,
         ]);
     }
