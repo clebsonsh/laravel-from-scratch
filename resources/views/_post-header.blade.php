@@ -13,10 +13,9 @@
     <div class="space-y-2 lg:space-y-0 lg:space-x-4 mt-8">
         <!--  Category -->
         <div class="relative flex lg:inline-flex items-center bg-gray-100 rounded-xl">
-            <div x-data="{ show: false }" @click.away="show = false">
-                <button @click="show = !show" class="py-2 pl-3 pr-9 font-semibold text-sm inline-flex">
-
-                    {{ isset($currentCategory) ? ucwords($currentCategory?->name) : 'Categories' }}
+            <x-dropdown>
+                <x-slot name="trigger">
+                    {{ ucwords($currentCategory->name ?? 'Categories') }}
                     <svg class="transform absolute -rotate-90 pointer-events-none" style="right: 12px;" width="22"
                         height="22" viewBox="0 0 22 22">
                         <g fill="none" fill-rule="evenodd">
@@ -27,22 +26,15 @@
                             </path>
                         </g>
                     </svg>
-                </button>
+                </x-slot>
 
-                <div x-show="show" class="py-2 mt-2 absolute bg-gray-100 w-full rounded-xl z-10 shadow"
-                    style="display: none;">
-                    <a href="/"
-                        class="block text-left px-3 text-sm leading-6 hover:bg-gray-300 focus:bg-gray-300">
-                        All
-                    </a>
-                    @foreach ($categories as $category)
-                        <a href="/categories/{{ $category->slug }}"
-                            class="block text-left px-3 text-sm leading-6 hover:bg-gray-300 focus:bg-gray-300">
-                            {{ ucwords($category->name) }}
-                        </a>
-                    @endforeach
-                </div>
-            </div>
+                <x-dropdown-item href="/" :active="request()->routeIs('home')">All</x-dropdown-item>
+                @foreach ($categories as $category)
+                    <x-dropdown-item href="/categories/{{ $category->slug }}" :active='request()->is("categories/{$category->slug}")'>
+                        {{ ucwords($category->name) }}
+                    </x-dropdown-item>
+                @endforeach
+            </x-dropdown>
         </div>
 
         <!-- Other Filters -->
