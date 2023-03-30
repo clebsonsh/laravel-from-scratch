@@ -21,10 +21,10 @@ class PostFactory extends Factory
         return [
             'user_id' => User::factory(),
             'category_id' => Category::factory(),
-            'title' => $this->faker->sentence(),
-            'slug' => $this->faker->slug(),
-            'excerpt' => $this->faker->sentence(30),
-            'body' => $this->faker->paragraph(5, true),
+            'title' => $this->faker->realText(40),
+            'slug' => $this->faker->slug,
+            'excerpt' => "<p>" . implode("</p><p>", $this->faker->paragraphs(2)) . "</p>",
+            'body' => "<p>" . implode("</p><p>", $this->faker->paragraphs(5)) . "</p>",
         ];
     }
 }

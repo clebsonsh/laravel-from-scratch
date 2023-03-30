@@ -18,16 +18,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $user = User::factory()->create([
-            'name' => 'John Doe',
-            'username' => 'john-doe'
-        ]);
+        $users = User::factory(5)->create();
 
-        $categories = Category::factory(5)->create();
+        $categories = Category::factory(20)->create();
 
         foreach ($categories as $category) {
-            Post::factory(4)->create([
-                'user_id' => $user->id,
+            Post::factory(collect([1, 2, 3, 4])->random())->create([
+                'user_id' => $users->random()->id,
                 'category_id' => $category->id,
             ]);
         }
