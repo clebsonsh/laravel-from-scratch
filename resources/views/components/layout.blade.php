@@ -1,5 +1,7 @@
 <!doctype html>
 
+<html lang="pt-BR">
+
 <head>
     <title>Laravel From Scratch Blog</title>
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
@@ -59,3 +61,5 @@
         </footer>
     </section>
 </body>
+
+</html>
