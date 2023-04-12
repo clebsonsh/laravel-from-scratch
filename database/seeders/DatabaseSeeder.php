@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
         $categories = Category::factory(20)->create();
 
         foreach ($categories as $category) {
-            Post::factory(collect([1, 2, 3, 4])->random())->create([
+            Post::factory(collect([20, 30, 40])->random())->create([
                 'user_id' => $users->random()->id,
                 'category_id' => $category->id,
             ]);

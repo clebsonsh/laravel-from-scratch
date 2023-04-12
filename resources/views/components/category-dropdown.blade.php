@@ -15,9 +15,11 @@
         
     @endphp
 
-    <x-dropdown-item href="/" :active="request()->routeIs('home')">All</x-dropdown-item>
+    <x-dropdown-item href="/?{{ http_build_query(request()->except('category', 'page')) }}" :active="request()->routeIs('home')">All
+    </x-dropdown-item>
     @foreach ($categories as $category)
-        <x-dropdown-item href="/?category={{ $category->slug }}&{{ http_build_query(request()->except('category')) }}">
+        <x-dropdown-item
+            href="/?category={{ $category->slug }}&{{ http_build_query(request()->except('category', 'page')) }}">
             {{ ucwords($category->name) }}
         </x-dropdown-item>
     @endforeach
