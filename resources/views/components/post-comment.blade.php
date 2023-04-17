@@ -3,8 +3,8 @@
 <x-panel class="bg-gray-50">
     <article class="flex space-x-4">
         <div class="flex-shrink-0">
-            <img class="rounded-full" src="https://i.pravatar.cc/100?u={{ $comment->id }}" alt="Profile" height="60"
-                width="60">
+            <img class="rounded-full" src="https://i.pravatar.cc/100?u={{ $comment->user_id }}" alt="Profile"
+                height="60" width="60">
         </div>
 
         <div>
