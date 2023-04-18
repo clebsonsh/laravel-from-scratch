@@ -18,3 +18,4 @@ Route::get('posts/{post:slug}', [PostController::class, 'show']);
 Route::post('posts/{post:slug}/comments', [PostCommentController::class, 'store'])->middleware('auth');
 
 Route::get('admin/posts/create', [PostController::class, 'create'])->middleware('admin');
+Route::post('admin/posts', [PostController::class, 'store'])->middleware('admin');
