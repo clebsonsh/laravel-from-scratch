@@ -10,13 +10,16 @@ class PostController extends Controller
     public function index()
     {
         return view('posts.index', [
-            'posts' => Post::latest()->filter(request(['search', 'category', 'author']))->paginate()->withQueryString(),
+            'posts' => Post::latest()
+                ->filter(request(['search', 'category', 'author']))
+                ->paginate()
+                ->withQueryString(),
         ]);
     }
 
     public function show(Post $post)
     {
-        return view('posts.show', ['post' =>  $post]);
+        return view('posts.show', ['post' => $post]);
     }
 
     public function create()
@@ -31,12 +34,16 @@ class PostController extends Controller
         $attributes = request()->validate([
             'title' => 'required',
             'slug' => 'required|unique:posts,slug',
+            'thumbnail' => 'required|image',
             'excerpt' => 'required',
             'body' => 'required',
             'category_id' => 'required|exists:categories,id',
         ]);
 
-        auth()->user()->posts()->create($attributes);
+        $attributes['user_id'] = auth()->id();
+        $attributes['thumbnail'] = request()->file('thumbnail')->store('thumbnails');
+
+        Post::create($attributes);
 
         return redirect('/');
     }

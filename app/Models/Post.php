@@ -10,11 +10,13 @@ class Post extends Model
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
+        'category_id',
+        'slug',
         'title',
+        'thumbnail',
         'excerpt',
         'body',
-        'slug',
-        'category_id'
     ];
 
     protected $with = ['author', 'category'];
