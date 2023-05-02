@@ -6,9 +6,9 @@
                 <form action="/login" method="POST" class="mt-10">
                     @csrf
 
-                    <x-form.input name="email" type="email" autocomplete="username" />
+                    <x-form.input name="email" type="email" autocomplete="username" requierd />
 
-                    <x-form.input name="password" type="password" autocomplete="current-password" />
+                    <x-form.input name="password" type="password" autocomplete="current-password" requierd />
 
                     <div class="flex justify-end">
                         <x-form.button>Log in</x-form.button>

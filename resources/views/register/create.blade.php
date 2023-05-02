@@ -5,13 +5,13 @@
             <form action="/register" method="POST" class="mt-10">
                 @csrf
 
-                <x-form.input name="name" />
+                <x-form.input name="name" required />
 
-                <x-form.input name="username" />
+                <x-form.input name="username" required />
 
-                <x-form.input name="email" type="email" autocomplete="username" />
+                <x-form.input name="email" type="email" autocomplete="username" required />
 
-                <x-form.input name="password" type="password" autocomplete="new-password" />
+                <x-form.input name="password" type="password" autocomplete="new-password" required />
 
                 <div class="flex justify-end">
                     <x-form.button>Log in</x-form.button>

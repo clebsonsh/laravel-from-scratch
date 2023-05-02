@@ -19,7 +19,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $users = User::factory(50)->create();
+        User::create([
+            'name' => 'Clebson Moura',
+            'username' => 'clebson.moura',
+            'email' => 'clebson.moura@exata.it',
+            'email_verified_at' => now(),
+            'password' => bcrypt('password'),
+        ]);
+
+        $users = User::factory(10)->create();
 
         $categories = Category::factory(10)->create();
 
@@ -27,7 +35,7 @@ class DatabaseSeeder extends Seeder
         foreach ($categories as $category) {
 
             $posts->push(
-                ...Post::factory(rand(5, 15))->create([
+                ...Post::factory(rand(2, 10))->create([
                     'user_id' => $users->random()->id,
                     'category_id' => $category->id,
                 ])
@@ -35,7 +43,7 @@ class DatabaseSeeder extends Seeder
         }
 
         foreach ($posts as $post) {
-            foreach (range(1, rand(2, 15)) as $x) {
+            foreach (range(1, rand(2, 10)) as $x) {
                 Comment::factory()->create([
                     'post_id' => $post->id,
                     'user_id' => $users->random()->id,
