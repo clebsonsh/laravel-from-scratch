@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 
 class AdminPostController extends Controller
 {
@@ -24,19 +25,10 @@ class AdminPostController extends Controller
 
     public function store()
     {
-        $attributes = request()->validate([
-            'title' => 'required|min:3|max:255',
-            'slug' => 'required|min:3|max:255|unique:posts,slug',
-            'thumbnail' => 'required|image',
-            'excerpt' => 'required|min:3',
-            'body' => 'required|min:3',
-            'category_id' => 'required|exists:categories,id',
+        request()->user()->posts()->create([
+            ...$this->validatePost(),
+            'thumbnail' => request()->file('thumbnail')->store('thumbnails')
         ]);
-
-        $attributes['user_id'] = auth()->id();
-        $attributes['thumbnail'] = request()->file('thumbnail')->store('thumbnails');
-
-        Post::create($attributes);
 
         return redirect()->route('home')->with('success', 'Post created!');
     }
@@ -51,14 +43,7 @@ class AdminPostController extends Controller
 
     public function update(Post $post)
     {
-        $attributes = request()->validate([
-            'title' => 'required|min:3|max:255',
-            'slug' => 'required|min:3|max:255|unique:posts,slug,' . $post->id,
-            'thumbnail' => 'image',
-            'excerpt' => 'required|min:3',
-            'body' => 'required|min:3',
-            'category_id' => 'required|exists:categories,id',
-        ]);
+        $attributes = $this->validatePost($post);
 
         if (request()->file('thumbnail')) {
             if ($post->thumbnail && Storage::exists($post->thumbnail ?? '')) {
@@ -81,5 +66,19 @@ class AdminPostController extends Controller
         $post->delete();
 
         return back()->with('success', 'Post deleted!');
+    }
+
+    protected function validatePost(?Post $post = null)
+    {
+        $post ??= new Post();
+
+        return request()->validate([
+            'title' => 'required|min:3|max:255',
+            'thumbnail' => $post->exists ? 'image' : 'required|image',
+            'slug' => ['required', 'min:3', 'max:255', Rule::unique('posts')->ignore($post)],
+            'excerpt' => 'required|min:3',
+            'body' => 'required|min:3',
+            'category_id' => 'required|exists:categories,id',
+        ]);
     }
 }
